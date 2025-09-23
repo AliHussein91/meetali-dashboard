@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { getCookie } from 'cookies-next';
 
-const API_URL = 'https://myportfolio-ewtufvor.b4a.run';
+const API_URL = 'https://api.meetali.online/api';
 
 const api = axios.create({
   baseURL: API_URL,

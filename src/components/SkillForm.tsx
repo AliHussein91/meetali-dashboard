@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { Skill, createSkill, updateSkill } from '@/services/skills';
 import { uploadImage } from '@/services/projects';
 
@@ -49,8 +50,12 @@ export default function SkillForm({ skill }: SkillFormProps) {
         await createSkill(formData);
       }
       router.push('/skills');
-    } catch (err: any) {
-      setError(err.message || 'Failed to save skill');
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred');
+      }
     }
   };
 
@@ -71,7 +76,9 @@ export default function SkillForm({ skill }: SkillFormProps) {
         onChange={(e) => setImageFile(e.target.files ? e.target.files[0] : null)}
         style={{ marginBottom: '10px', padding: '8px' }}
       />
-      {imageUrl && !imageFile && <img src={imageUrl} alt="Skill" style={{ width: '100px', height: '100px', objectFit: 'cover' }} />}
+      {imageUrl && !imageFile && (
+        <Image src={imageUrl} alt="Skill" width={100} height={100} style={{ objectFit: 'cover' }} />
+      )}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <button type="submit" style={{ padding: '10px' }}>{skill ? 'Update' : 'Create'}</button>
     </form>

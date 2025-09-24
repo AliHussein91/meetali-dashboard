@@ -19,8 +19,12 @@ export default function LoginPage() {
       const data = await login(email, password);
       setCookie('token', data.token, { path: '/' });
       router.push('/');
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError('An unknown error occurred');
+      }
     }
   };
 

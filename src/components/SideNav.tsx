@@ -35,15 +35,14 @@ export default function SideNav() {
       <ul className="flex-grow">
         {navItems.map(({ href, label, icon: Icon }) => (
           <li key={href}>
-            <Link href={href}>
-              <a
-                className={`flex items-center p-4 text-lg hover:bg-gray-700 transition-colors duration-300 ${
-                  pathname === href ? 'bg-gray-700' : ''
-                }`}
-              >
-                <Icon className="mr-3" />
-                {label}
-              </a>
+            <Link
+              href={href}
+              className={`flex items-center p-4 text-lg hover:bg-gray-700 transition-colors duration-300 ${
+                pathname === href ? 'bg-gray-700' : ''
+              }`}
+            >
+              <Icon className="mr-3" />
+              {label}
             </Link>
           </li>
         ))}

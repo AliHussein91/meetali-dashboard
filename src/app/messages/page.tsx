@@ -13,7 +13,7 @@ export default function MessagesPage() {
       try {
         const data = await getMessages();
         setMessages(data);
-      } catch (err) {
+      } catch {
         setError('Failed to fetch messages');
       } finally {
         setLoading(false);
@@ -27,7 +27,7 @@ export default function MessagesPage() {
       try {
         await deleteMessage(id);
         setMessages(messages.filter((m) => m._id !== id));
-      } catch (err) {
+      } catch {
         setError('Failed to delete message');
       }
     }
@@ -37,7 +37,7 @@ export default function MessagesPage() {
     try {
       const updatedMessage = await markAsRead(id);
       setMessages(messages.map((m) => (m._id === id ? updatedMessage : m)));
-    } catch (err) {
+    } catch {
       setError('Failed to mark message as read');
     }
   };

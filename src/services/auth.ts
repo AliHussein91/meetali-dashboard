@@ -4,7 +4,10 @@ export async function login(email: string, password: string): Promise<{ token: s
   try {
     const response = await api.post('/auth/login', { email, password });
     return response.data;
-  } catch (error: any) {
-    throw new Error(error.response?.data?.message || 'Failed to login');
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message || 'Failed to login');
+    }
+    throw new Error('Failed to login');
   }
 }

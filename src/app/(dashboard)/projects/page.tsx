@@ -14,7 +14,7 @@ export default function ProjectsPage() {
       try {
         const data = await getProjects();
         setProjects(data);
-      } catch {
+      } catch (err) {
         setError('Failed to fetch projects');
       } finally {
         setLoading(false);
@@ -28,7 +28,7 @@ export default function ProjectsPage() {
       try {
         await deleteProject(id);
         setProjects(projects.filter((p) => p._id !== id));
-      } catch {
+      } catch (err) {
         setError('Failed to delete project');
       }
     }

@@ -22,7 +22,7 @@ export default function EditProjectPage({ params }: EditProjectPageProps) {
         try {
           const data = await getProject(id as string);
           setProject(data);
-        } catch {
+        } catch (err) {
           setError('Failed to fetch project');
         } finally {
           setLoading(false);

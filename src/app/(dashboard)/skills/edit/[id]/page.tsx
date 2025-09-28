@@ -22,7 +22,7 @@ export default function EditSkillPage({ params }: EditSkillPageProps) {
         try {
           const data = await getSkill(id as string);
           setSkill(data);
-        } catch {
+        } catch (err) {
           setError('Failed to fetch skill');
         } finally {
           setLoading(false);

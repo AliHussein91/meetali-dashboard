@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { getSkills, deleteSkill, Skill } from '@/services/skills';
 
 export default function SkillsPage() {
@@ -15,7 +14,7 @@ export default function SkillsPage() {
       try {
         const data = await getSkills();
         setSkills(data);
-      } catch {
+      } catch (err) {
         setError('Failed to fetch skills');
       } finally {
         setLoading(false);
@@ -29,7 +28,7 @@ export default function SkillsPage() {
       try {
         await deleteSkill(id);
         setSkills(skills.filter((s) => s._id !== id));
-      } catch {
+      } catch (err) {
         setError('Failed to delete skill');
       }
     }
@@ -57,7 +56,7 @@ export default function SkillsPage() {
             <tr key={skill._id}>
               <td style={{ border: '1px solid #ddd', padding: '8px' }}>{skill.name}</td>
               <td style={{ border: '1px solid #ddd', padding: '8px' }}>
-                <Image src={skill.image} alt={skill.name} width={50} height={50} style={{ objectFit: 'cover' }} />
+                <img src={skill.image} alt={skill.name} style={{ width: '50px', height: '50px', objectFit: 'cover' }} />
               </td>
               <td style={{ border: '1px solid #ddd', padding: '8px' }}>
                 <Link href={`/skills/edit/${skill._id}`}>
